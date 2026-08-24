@@ -1,17 +1,15 @@
 {
   "expo": {
-    "name": "Basketly",
+    "name": "basketly",
     "slug": "basketly",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "basketly",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
     "ios": {
       "icon": "./assets/expo.icon",
-      "supportsTablet": true,
-      "bundleIdentifier": "com.basketly.app"
+      "bundleIdentifier": "com.devburakork.basketly"
     },
     "android": {
       "adaptiveIcon": {
@@ -20,23 +18,33 @@
         "backgroundImage": "./assets/images/android-icon-background.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
-      "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "package": "com.basketly.app"
+      "package": "com.devburakork.basketly"
     },
     "web": {
-      "output": "static",
+      "output": "server",
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
+      "@clerk/expo",
       "expo-router",
       [
         "expo-splash-screen",
         {
-          "backgroundColor": "#237A4B",
-          "image": "./assets/images/splash-icon.png",
-          "imageWidth": 180,
-          "resizeMode": "contain"
+          "backgroundColor": "#208AEF",
+          "android": {
+            "image": "./assets/images/splash-icon.png",
+            "imageWidth": 76
+          }
+        }
+      ],
+      "expo-web-browser",
+      [
+        "@sentry/react-native/expo",
+        {
+          "url": "https://sentry.io/",
+          "project": "basketly",
+          "organization": "codesistency-gs"
         }
       ]
     ],

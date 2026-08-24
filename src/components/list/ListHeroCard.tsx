@@ -15,11 +15,11 @@ const ListHeroCard = () => {
       </Text>
 
       <Text className="mt-1 text-3xl font-extrabold text-primary-foreground">
-        Your Basketly List
+        Your Grocery Board
       </Text>
 
       <Text className="mt-1 text-sm text-primary-foreground/80">
-        {pendingCount} to shop · {completedCount} done
+        {pendingCount} pending · {completedCount} completed
       </Text>
 
       <View className="mt-4 overflow-hidden rounded-full bg-white/50">

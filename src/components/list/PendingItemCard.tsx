@@ -1,6 +1,6 @@
 import { GroceryItem, useGroceryStore } from "@/store/grocery-store";
 import { FontAwesome6 } from "@expo/vector-icons";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, Text, View } from "react-native";
 
 const priorityPillBg = {
   low: "bg-priority-low",
@@ -21,12 +21,9 @@ const PendingItemCard = ({ item }: { item: GroceryItem }) => {
     <View className="rounded-3xl border border-border bg-card p-4">
       <View className="flex-row items-start gap-3">
         <Pressable
-          accessibilityRole="checkbox"
-          accessibilityState={{ checked: item.purchased }}
-          accessibilityLabel={`Mark ${item.name} as purchased`}
-          style={({ pressed }) => [styles.checkbox, pressed && styles.pressed]}
-          onPress={() => void togglePurchased(item.id)}
-        />
+          className="mt-1 size-6 items-center justify-center rounded-full border-2 border-border bg-card"
+          onPress={() => togglePurchased(item.id)}
+        ></Pressable>
 
         <View className="flex-1">
           <View className="flex-row items-center justify-between gap-2">
@@ -40,16 +37,16 @@ const PendingItemCard = ({ item }: { item: GroceryItem }) => {
 
           <View className="mt-2 flex-row items-center gap-2">
             <View className="rounded-full bg-secondary px-3 py-1">
-              <Text className="text-xs font-semibold text-secondary-foreground">{item.category}</Text>
+              <Text className="text-xs font-semibold text-secondary-foreground">
+                {item.category}
+              </Text>
             </View>
           </View>
 
           <View className="mt-3 flex-row items-center gap-2">
             <Pressable
-              accessibilityRole="button"
-              accessibilityLabel={`Decrease ${item.name} quantity`}
-              style={({ pressed }) => [styles.quantityButton, pressed && styles.pressed]}
-              onPress={() => void updateQuantity(item.id, item.quantity - 1)}
+              className="h-8 w-8 items-center justify-center rounded-xl border border-border bg-muted"
+              onPress={() => updateQuantity(item.id, Math.max(1, item.quantity - 1))}
             >
               <FontAwesome6 name="minus" size={12} color="#3b5a4a" />
             </Pressable>
@@ -59,10 +56,8 @@ const PendingItemCard = ({ item }: { item: GroceryItem }) => {
             </Text>
 
             <Pressable
-              accessibilityRole="button"
-              accessibilityLabel={`Increase ${item.name} quantity`}
-              style={({ pressed }) => [styles.quantityButton, pressed && styles.pressed]}
-              onPress={() => void updateQuantity(item.id, item.quantity + 1)}
+              className="h-8 w-8 items-center justify-center rounded-xl border border-border bg-muted"
+              onPress={() => updateQuantity(item.id, item.quantity + 1)}
             >
               <FontAwesome6 name="plus" size={12} color="#3b5a4a" />
             </Pressable>
@@ -70,10 +65,8 @@ const PendingItemCard = ({ item }: { item: GroceryItem }) => {
         </View>
 
         <Pressable
-          accessibilityRole="button"
-          accessibilityLabel={`Delete ${item.name}`}
-          style={({ pressed }) => [styles.deleteButton, pressed && styles.pressed]}
-          onPress={() => void removeItem(item.id)}
+          className="h-9 w-9 items-center justify-center rounded-xl bg-destructive"
+          onPress={() => removeItem(item.id)}
         >
           <FontAwesome6 name="trash" size={13} color="#d45f58" />
         </Pressable>
@@ -81,41 +74,5 @@ const PendingItemCard = ({ item }: { item: GroceryItem }) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  checkbox: {
-    width: 24,
-    height: 24,
-    marginTop: 4,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 12,
-    borderWidth: 2,
-    borderColor: "#b7cbbd",
-    backgroundColor: "#ffffff",
-  },
-  quantityButton: {
-    width: 32,
-    height: 32,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: "#b7cbbd",
-    backgroundColor: "#eef5ef",
-  },
-  deleteButton: {
-    width: 36,
-    height: 36,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 12,
-    backgroundColor: "#fdeceb",
-  },
-  pressed: {
-    opacity: 0.65,
-    transform: [{ scale: 0.97 }],
-  },
-});
 
 export default PendingItemCard;
